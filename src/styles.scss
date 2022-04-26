@@ -1,0 +1,95 @@
+html,
+body {
+    height: 100%;
+}
+
+@mixin flex-box($justify-content) {
+    display        : flex;
+    align-items    : center;
+    justify-content: $justify-content;
+}
+
+@mixin toggle-icon {
+    @include flex-box(center);
+    width        : 40px;
+    height       : 40px;
+    text-align   : center;
+    padding-right: 10px;
+    border-right : 2px solid #c5e0eb;
+}
+
+body {
+    background-color: #dbe8f0;
+    margin          : 0;
+    @include flex-box(center);
+}
+
+.mainContainer {
+    background-color: #eff4fa;
+    display         : flex;
+    height          : 600px;
+    width           : 1000px;
+    border-radius   : 20px;
+    padding         : 20px;
+    box-shadow      : rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+.mainBoard {
+    @include flex-box(flex-start);
+    flex          : 2;
+    flex-direction: row;
+}
+
+.toggleMainContainer {
+    @include flex-box(center);
+    flex-direction: column;
+    color         : #c5e0eb;
+
+    .dashboardIcon {
+        @include toggle-icon;
+        color: #6e94a9;
+    }
+
+    .mapIcon {
+        @include toggle-icon;
+    }
+}
+
+.selectionBoard {
+    flex          : 1;
+    padding-bottom: 10px;
+
+    .itemMainContainer {
+        @include flex-box(flex-end);
+        height        : 100%;
+        flex-direction: column;
+        position      : relative;
+
+
+        .itemOuterContainer {
+            background-color: #c5e0eb;
+            width           : 300px;
+            height          : 90%;
+            border-radius   : 20px;
+            box-shadow      : rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+
+
+            .itemInnerContainer {
+                background-color: #ffffff;
+                position        : absolute;
+                bottom          : 0;
+                height          : 75%;
+                width           : 300px;
+                border-radius   : 20px;
+            }
+        }
+
+        img {
+            max-width: 100%;
+            position : absolute;
+            top      : 0;
+        }
+    }
+
+
+}
