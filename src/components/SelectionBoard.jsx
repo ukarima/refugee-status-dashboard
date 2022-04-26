@@ -1,4 +1,6 @@
-import React from "react";
+import * as React from "react";
+
+import Input from "./Input";
 
 function SelectionBoard() {
   return (
@@ -9,7 +11,12 @@ function SelectionBoard() {
           alt="world"
         />
         <div className="itemOuterContainer">
-          <div className="itemInnerContainer">a</div>
+          <div className="itemInnerContainer">
+            <h3>Select Destination Country</h3>
+            <Input mode="country" />
+            <Input mode="year" />
+            <button class="mainButton">Green</button>
+          </div>
         </div>
       </div>
     </div>
