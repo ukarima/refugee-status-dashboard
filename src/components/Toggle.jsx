@@ -5,10 +5,10 @@ import MapRoundedIcon from "@mui/icons-material/MapRounded";
 function Toggle() {
   return (
     <div className="toggleMainContainer">
-      <div className="dashboardIcon">
+      <div className="toggleIcon">
         <GridViewRoundedIcon />
       </div>
-      <div className="mapIcon">
+      <div className="toggleIcon">
         <MapRoundedIcon />
       </div>
     </div>
