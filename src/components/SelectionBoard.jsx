@@ -15,7 +15,7 @@ function SelectionBoard() {
             <h3>Select Destination Country</h3>
             <Input mode="country" />
             <Input mode="year" />
-            <button class="mainButton">Green</button>
+            <button className="mainButton">Get Data</button>
           </div>
         </div>
       </div>
