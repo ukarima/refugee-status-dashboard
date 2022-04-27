@@ -78,12 +78,11 @@ body {
     .statOuterContainer {
         width: 100%;
 
-        @include flex-box(center);
+        @include flex-box(space-between);
         flex-direction: column;
         flex          : 1;
 
         .detailsContainer {
-            flex: 1;
             @include flex-box(space-between);
             width: 100%;
 
@@ -191,4 +190,11 @@ select {
 
 .shadow {
     @include soft-shadow;
+}
+
+.orange {
+    background-color: #efd8cd;
+    flex            : 1;
+    border-radius   : 10px;
+    margin          : 30px;
 }

@@ -19,7 +19,9 @@ function Dashboard() {
               <Stats />
               <Stats />
             </div>
-            <div className="detailsContainer"></div>
+            <div className="detailsContainer orange">
+              <h3>Country's refugee data in year</h3>
+            </div>
             <div className="detailsContainer shadow">
               <Trendline />
             </div>
