@@ -12,11 +12,12 @@ body {
 
 @mixin toggle-icon {
     @include flex-box(center);
-    width        : 40px;
-    height       : 40px;
-    text-align   : center;
-    padding-right: 10px;
-    border-right : 2px solid #c5e0eb;
+    width       : 40px;
+    height      : 40px;
+    text-align  : center;
+    border-right: 2px solid #c5e0eb;
+    padding     : 5px 10px 5px 0;
+    cursor      : pointer;
 
 }
 
@@ -60,6 +61,11 @@ body {
 
     .toggleIcon {
         @include toggle-icon;
+    }
+
+    .selectedToggle {
+        color       : #6e94a9;
+        border-right: 2px solid #6e94a9;
     }
 }
 
