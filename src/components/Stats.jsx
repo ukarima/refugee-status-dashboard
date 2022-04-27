@@ -2,17 +2,17 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const percentage = 66;
-function Stats({ mode }) {
+function Stats({ name, number, percentage, mode, onClick }) {
   return (
     <div
       className={
-        mode !== "isClicked"
+        mode !== true
           ? "donutOuterContainer notSelectedItem"
           : "donutOuterContainer"
       }
+      onClick={onClick}
     >
-      {mode === "isClicked" ? (
+      {mode === true ? (
         <div className="donutInnerContainer">
           <CircularProgressbar
             value={percentage}
@@ -27,8 +27,8 @@ function Stats({ mode }) {
         </div>
       ) : null}
       <div className="detailsText">
-        <div className="detailNumber">167000</div>
-        <div>Refugee</div>
+        <div className="detailNumber">{number}</div>
+        <p>{name}</p>
       </div>
     </div>
   );
