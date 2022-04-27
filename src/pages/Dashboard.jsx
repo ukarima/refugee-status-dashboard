@@ -1,50 +1,22 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 import SelectionBoard from "../components/SelectionBoard";
 import Toggle from "../components/Toggle";
 import Stats from "../components/Stats";
 import Trendline from "../components/Trendline";
+import { changeClickedItem } from "../redux/selectedOption";
 
 function Dashboard() {
   const selectedCountry = useSelector((state) => state.selectedOptions.country);
   const selectedYear = useSelector((state) => state.selectedOptions.year);
+  const dispatch = useDispatch();
 
   const [dataset, setDataset] = React.useState("");
 
-  const [refugeesClicked, setRefugeesClicked] = React.useState(true);
-  const [ASClicked, setASClicked] = React.useState(false);
-  const [statelessClicked, setStatelessClicked] = React.useState(false);
-  const [othersClicked, setOthersClicked] = React.useState(false);
-
   const handleClick = (value) => () => {
-    switch (value) {
-      case 1:
-        setRefugeesClicked(false);
-        setASClicked(true);
-        setStatelessClicked(false);
-        setOthersClicked(false);
-        break;
-      case 2:
-        setRefugeesClicked(false);
-        setASClicked(false);
-        setStatelessClicked(true);
-        setOthersClicked(false);
-        break;
-      case 3:
-        setRefugeesClicked(false);
-        setASClicked(false);
-        setStatelessClicked(false);
-        setOthersClicked(true);
-        break;
-      default:
-        setRefugeesClicked(true);
-        setASClicked(false);
-        setStatelessClicked(false);
-        setOthersClicked(false);
-        break;
-    }
+    dispatch(changeClickedItem({ item: value }));
   };
 
   const getData = async () => {
@@ -83,22 +55,19 @@ function Dashboard() {
                 name="Refugees"
                 number={dataset.refugees}
                 percentage={percentage(dataset.refugees)}
-                onClick={handleClick(0)}
-                mode={refugeesClicked}
+                onClick={handleClick("Refugees")}
               />
               <Stats
                 name="Asylum Seekers"
                 number={dataset.asylum_seekers}
                 percentage={percentage(dataset.asylum_seekers)}
-                onClick={handleClick(1)}
-                mode={ASClicked}
+                onClick={handleClick("Asylum Seekers")}
               />
               <Stats
                 name="Stateless"
                 number={dataset.stateless}
                 percentage={percentage(dataset.stateless)}
-                onClick={handleClick(2)}
-                mode={statelessClicked}
+                onClick={handleClick("Stateless")}
               />
               <Stats
                 name="Others"
@@ -106,8 +75,7 @@ function Dashboard() {
                 percentage={percentage(
                   parseInt(dataset.idps) + parseInt(dataset.ooc)
                 )}
-                onClick={handleClick(3)}
-                mode={othersClicked}
+                onClick={handleClick("Others")}
               />
             </div>
             <div className="detailsContainer orange">

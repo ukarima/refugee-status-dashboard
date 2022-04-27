@@ -1,18 +1,22 @@
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useSelector } from "react-redux";
 
-function Stats({ name, number, percentage, mode, onClick }) {
+function Stats({ name, number, percentage, onClick }) {
+  const selectedItem = useSelector(
+    (state) => state.selectedOptions.clickedItem
+  );
   return (
     <div
       className={
-        mode !== true
+        name !== selectedItem
           ? "donutOuterContainer notSelectedItem"
           : "donutOuterContainer"
       }
       onClick={onClick}
     >
-      {mode === true ? (
+      {name === selectedItem ? (
         <div className="donutInnerContainer">
           <CircularProgressbar
             value={percentage}
