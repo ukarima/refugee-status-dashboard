@@ -39,10 +39,10 @@ body {
 .mainContainer {
     background-color: #eff4fa;
     display         : flex;
-    height          : 600px;
+    height          : 550px;
     width           : 1000px;
     border-radius   : 20px;
-    padding         : 20px;
+    padding         : 20px 40px 40px 20px;
     box-shadow      : rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 
@@ -50,6 +50,7 @@ body {
     @include flex-box(flex-start);
     flex          : 2;
     flex-direction: row;
+    margin-right  : 10px
 }
 
 .toggleMainContainer {
@@ -68,7 +69,6 @@ body {
     padding       : 0 20px 0 20px;
     display       : flex;
     flex-direction: column;
-    padding-bottom: 20px;
 
 
     h1 {
@@ -91,8 +91,7 @@ body {
 }
 
 .selectionBoard {
-    flex          : 1;
-    padding-bottom: 10px;
+    flex: 1;
 
     .itemMainContainer {
         @include flex-box(flex-end);
@@ -104,7 +103,7 @@ body {
         .itemOuterContainer {
             background-color: #c5e0eb;
             width           : 300px;
-            height          : 70%;
+            height          : 80%;
             border-radius   : 20px;
             box-shadow      : rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 
@@ -116,7 +115,7 @@ body {
                 background-color: #ffffff;
                 position        : absolute;
                 bottom          : 0;
-                height          : 55%;
+                height          : 60%;
                 width           : 300px;
                 border-radius   : 20px;
                 padding         : 0 20px 0 20px;
@@ -132,22 +131,11 @@ body {
         img {
             max-width: 100%;
             position : absolute;
-            top      : 0;
+            top      : 50px;
         }
     }
 
 
-}
-
-.mainButton {
-    border          : none;
-    color           : #ffffff;
-    width           : 100%;
-    height          : 35px;
-    text-align      : center;
-    cursor          : pointer;
-    background-color: #f38653;
-    border-radius   : 5px;
 }
 
 select {
@@ -191,6 +179,12 @@ select {
     }
 }
 
+.donutOuterContainer:hover {
+    box-shadow: 4px 2px 18px #bbcfda, -4px -4px 13px #ffffff,
+        inset 6px 6px 16px rgba(209, 217, 230, 0.6),
+        inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+}
+
 .notSelectedItem {
     width: 110px;
 }
@@ -203,5 +197,7 @@ select {
     background-color: #efd8cd;
     flex            : 1;
     border-radius   : 10px;
-    margin          : 30px;
+    margin          : 20px;
+    padding         : 10px;
+    box-sizing      : border-box
 }
