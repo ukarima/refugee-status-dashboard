@@ -46,7 +46,7 @@ function Dashboard() {
   return (
     <div className="mainContainer">
       <div className="mainBoard">
-        <Toggle />
+        <Toggle id="dashboard" />
         <div className="statMainContainer">
           <h1>Dashboard</h1>
           <div className="statOuterContainer">
