@@ -16,7 +16,7 @@ function Input({ mode }) {
     dispatch(addCountry({ country: event.target.value }));
   }
   function yearOnChangeHandler(event) {
-    dispatch(addYear({ year: event.target.value }));
+    dispatch(addYear({ year: parseInt(event.target.value) }));
   }
 
   const getData = async () => {

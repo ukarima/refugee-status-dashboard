@@ -79,7 +79,9 @@ function Dashboard() {
               />
             </div>
             <div className="detailsContainer orange">
-              <h3>-</h3>
+              <h3>
+                {dataset.coa_name}'s Refugee Status Data in {selectedYear}
+              </h3>
             </div>
             <div className="detailsContainer shadow">
               <Trendline />
@@ -87,7 +89,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-
       <SelectionBoard />
     </div>
   );

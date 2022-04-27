@@ -1,52 +1,36 @@
 import React from "react";
 import { AreaChart, Area, XAxis, YAxis, Tooltip } from "recharts";
-
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 export default function Trendline() {
+  const selectedCountry = useSelector((state) => state.selectedOptions.country);
+  const selectedYear = useSelector((state) => state.selectedOptions.year);
+
+  const [dataset, setDataset] = React.useState("");
+
+  const getData = async () => {
+    const url = `https://api.unhcr.org/population/v1/demographics/?limit=&page=&yearFrom=${
+      selectedYear - 10
+    }&yearTo=${selectedYear}&year=&coo=&coa=${selectedCountry}`;
+
+    const response = await axios.get(url);
+    setDataset(response.data.items);
+  };
+
+  const data = [];
+  for (let i = 0; i < dataset.length; i++) {
+    data.push({
+      name: dataset[i].year,
+      male: dataset[i].m_total,
+      female: dataset[i].f_total,
+    });
+  }
+  React.useEffect(() => {
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCountry, selectedYear]);
+
   return (
     <AreaChart
       width={600}
@@ -69,14 +53,14 @@ export default function Trendline() {
       <Tooltip />
       <Area
         type="monotone"
-        dataKey="uv"
+        dataKey="female"
         stroke="#f38653"
         fillOpacity={1}
         fill="url(#colorUv)"
       />
       <Area
         type="monotone"
-        dataKey="pv"
+        dataKey="male"
         stroke="#2FA4FF"
         fillOpacity={1}
         fill="url(#colorPv)"
