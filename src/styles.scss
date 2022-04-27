@@ -166,6 +166,7 @@ select {
     height    : 100px;
     padding   : 10px;
     box-sizing: border-box;
+    cursor    : pointer;
 
     .donutInnerContainer {
         width: 80px;
@@ -180,6 +181,12 @@ select {
         .detailNumber {
             font-size  : 1rem;
             font-weight: bold;
+        }
+
+        p {
+            font-size : 10px;
+            margin    : 0;
+            margin-top: 3px;
         }
     }
 }
