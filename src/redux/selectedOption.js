@@ -17,10 +17,15 @@ const selectedOptionSlice = createSlice({
     changeClickedItem: (state, action) => {
       state.clickedItem = action.payload.item;
     },
+    reset: (state, action) => {
+      state.country = action.payload.country;
+      state.year = action.payload.year;
+    },
   },
 });
 
 export const changeClickedItem = selectedOptionSlice.actions.changeClickedItem;
 export const addCountry = selectedOptionSlice.actions.addCountry;
 export const addYear = selectedOptionSlice.actions.addYear;
+export const reset = selectedOptionSlice.actions.reset;
 export default selectedOptionSlice.reducer;

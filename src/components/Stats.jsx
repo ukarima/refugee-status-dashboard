@@ -4,9 +4,26 @@ import "react-circular-progressbar/dist/styles.css";
 import { useSelector } from "react-redux";
 
 function Stats({ name, number, percentage, onClick }) {
+  const selectedCountry = useSelector((state) => state.selectedOptions.country);
+  const selectedYear = useSelector((state) => state.selectedOptions.year);
   const selectedItem = useSelector(
     (state) => state.selectedOptions.clickedItem
   );
+
+  const [isActivated, setIsActivated] = React.useState(false);
+
+  function urlCheck() {
+    if (selectedCountry !== "" && selectedYear !== "") {
+      setIsActivated(true);
+    } else {
+      setIsActivated(false);
+    }
+  }
+
+  React.useEffect(() => {
+    urlCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCountry, selectedYear]);
   return (
     <div
       className={
@@ -19,8 +36,8 @@ function Stats({ name, number, percentage, onClick }) {
       {name === selectedItem ? (
         <div className="donutInnerContainer">
           <CircularProgressbar
-            value={percentage}
-            text={`${percentage}%`}
+            value={isActivated ? percentage : 0}
+            text={isActivated ? `${percentage}%` : "0%"}
             styles={buildStyles({
               textSize: "14px",
               textColor: "black",
@@ -31,7 +48,7 @@ function Stats({ name, number, percentage, onClick }) {
         </div>
       ) : null}
       <div className="detailsText">
-        <div className="detailNumber">{number}</div>
+        <div className="detailNumber">{isActivated ? number : 0}</div>
         <p>{name}</p>
       </div>
     </div>

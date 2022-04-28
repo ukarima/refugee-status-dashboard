@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 function Toggle({ id }) {
   const navigate = useNavigate();
 
-  const [isClicked, setIsClicked] = React.useState(true);
-
   return (
     <div className="toggleMainContainer">
       <div

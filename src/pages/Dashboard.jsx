@@ -13,7 +13,17 @@ function Dashboard() {
   const selectedYear = useSelector((state) => state.selectedOptions.year);
   const dispatch = useDispatch();
 
-  const [dataset, setDataset] = React.useState("");
+  const [dataset, setDataset] = React.useState([]);
+  const [isActivated, setIsActivated] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+
+  function urlCheck() {
+    if (selectedCountry !== "" && selectedYear !== "") {
+      setIsActivated(true);
+    } else {
+      setIsActivated(false);
+    }
+  }
 
   const handleClick = (value) => () => {
     dispatch(changeClickedItem({ item: value }));
@@ -23,11 +33,19 @@ function Dashboard() {
     const url = `https://api.unhcr.org/population/v1/population/?limit=&page=&yearFrom=&yearTo=&year=${selectedYear}&coo=&coa=${selectedCountry}`;
 
     const response = await axios.get(url);
-    setDataset(response.data.items[0]);
+    const dataLength = response.data.maxPages;
+
+    const errorCheckk = () => {
+      setDataset(response.data.items[0]);
+      setIsError(false);
+    };
+
+    dataLength !== 0 ? errorCheckk() : setIsError(true);
   };
 
   React.useEffect(() => {
     getData();
+    urlCheck();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCountry, selectedYear]);
 
@@ -79,12 +97,14 @@ function Dashboard() {
               />
             </div>
             <div className="detailsContainer orange">
-              <h3>
-                {dataset.coa_name}'s Refugee Status Data in {selectedYear}
-              </h3>
+              {isActivated && (
+                <h3>
+                  {dataset.coa_name}'s Refugee Status Data in {selectedYear}
+                </h3>
+              )}
             </div>
             <div className="detailsContainer shadow">
-              <Trendline />
+              {isActivated && <Trendline />}
             </div>
           </div>
         </div>
