@@ -17,7 +17,7 @@ function Map() {
 
   const colorScale = scaleLinear()
     .domain([0, 3700000])
-    .range(["#bbcfda", "#2FA4FF"]);
+    .range(["#bbcfda", "#0F00FF"]);
 
   const [countries, setCountries] = React.useState([]);
   const getCountries = async () => {
@@ -52,11 +52,11 @@ function Map() {
                     );
                     return (
                       <Geography
-                        stroke="#FFF"
+                        stroke="#eff4fa"
                         strokeWidth={0.3}
                         key={index}
                         geography={geo}
-                        fill={isos ? colorScale(isos["refugees"]) : "#FFF"}
+                        fill={isos ? colorScale(isos["refugees"]) : "#eff4fa"}
                       />
                     );
                   })
