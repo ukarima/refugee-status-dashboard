@@ -104,7 +104,7 @@ function Dashboard() {
               )}
             </div>
             <div className="detailsContainer shadow">
-              {isActivated && <Trendline />}
+              <Trendline mode={isActivated} />
             </div>
           </div>
         </div>

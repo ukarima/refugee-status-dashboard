@@ -8,8 +8,6 @@ function Input({ mode }) {
   const [countries, setCountries] = React.useState([]);
   const [years, setYears] = React.useState([]);
 
-  // const selectedCountry = useSelector((state) => state.selectedOptions.country);
-  // const selectedYear = useSelector((state) => state.selectedOptions.year);
   const dispatch = useDispatch();
 
   function countryOnChangeHandler(event) {

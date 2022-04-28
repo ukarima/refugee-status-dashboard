@@ -3,7 +3,9 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip } from "recharts";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-export default function Trendline() {
+import dummy_data from "../redux/dummy_data";
+
+export default function Trendline({ mode }) {
   const selectedCountry = useSelector((state) => state.selectedOptions.country);
   const selectedYear = useSelector((state) => state.selectedOptions.year);
 
@@ -35,7 +37,7 @@ export default function Trendline() {
     <AreaChart
       width={600}
       height={200}
-      data={data}
+      data={mode ? data : dummy_data}
       margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
     >
       <defs>
