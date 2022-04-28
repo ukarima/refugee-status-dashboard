@@ -24,3 +24,4 @@ yarn-error.log*
 
 #local database
 db_2021.json
+src/redux/dummy_data.js
