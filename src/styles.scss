@@ -120,7 +120,7 @@ body {
                 flex-direction  : column;
                 background-color: #ffffff;
                 position        : absolute;
-                bottom          : 70px;
+                bottom          : 60px;
                 height          : 50%;
                 width           : 100%;
                 border-radius   : 20px;
@@ -140,6 +140,27 @@ body {
             max-width: 100%;
             position : absolute;
             top      : 40px;
+        }
+
+        .mainButton {
+            border          : none;
+            color           : #ffffff;
+            height          : 30px;
+            text-align      : center;
+            cursor          : pointer;
+            background-color: #f38653;
+            border-radius   : 5px;
+            position        : absolute;
+            bottom          : 15px;
+            left            : 0;
+            right           : 0;
+            margin-left     : auto;
+            margin-right    : auto;
+            width           : 90px;
+        }
+
+        .mainButton:hover {
+            opacity: 0.6;
         }
     }
 

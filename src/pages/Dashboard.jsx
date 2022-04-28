@@ -44,8 +44,8 @@ function Dashboard() {
   };
 
   React.useEffect(() => {
-    getData();
     urlCheck();
+    getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCountry, selectedYear]);
 

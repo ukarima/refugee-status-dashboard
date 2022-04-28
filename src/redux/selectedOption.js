@@ -20,6 +20,7 @@ const selectedOptionSlice = createSlice({
     reset: (state, action) => {
       state.country = action.payload.country;
       state.year = action.payload.year;
+      state.clickedItem = action.payload.item;
     },
   },
 });

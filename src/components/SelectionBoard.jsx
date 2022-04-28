@@ -1,8 +1,16 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
+
+import { reset } from "../redux/selectedOption";
 
 import Input from "./Input";
 
 function SelectionBoard() {
+  const dispatch = useDispatch();
+
+  function resetHandler() {
+    dispatch(reset({ country: "", year: "", item: "Refugees" }));
+  }
   return (
     <div className="selectionBoard">
       <div className="itemMainContainer">
@@ -16,6 +24,9 @@ function SelectionBoard() {
             <Input mode="country" />
             <Input mode="year" />
           </div>
+          <button className="mainButton" onClick={resetHandler}>
+            Reset
+          </button>
         </div>
       </div>
     </div>

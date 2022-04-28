@@ -26,7 +26,7 @@ function Toggle({ id }) {
         className={id === "map" ? "toggleIcon selectedToggle" : "toggleIcon"}
         onClick={() => {
           navigate("/map");
-          dispatch(reset({ country: "", year: "" }));
+          dispatch(reset({ country: "", year: "", item: "Refugees" }));
         }}
       >
         <MapRoundedIcon />

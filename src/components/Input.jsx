@@ -1,10 +1,13 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 import { addCountry, addYear } from "../redux/selectedOption";
 
 function Input({ mode }) {
+  const selectedCountry = useSelector((state) => state.selectedOptions.country);
+  const selectedYear = useSelector((state) => state.selectedOptions.year);
+
   const [countries, setCountries] = React.useState([]);
   const [years, setYears] = React.useState([]);
 
@@ -36,7 +39,7 @@ function Input({ mode }) {
   return (
     <>
       {mode === "country" ? (
-        <select onChange={countryOnChangeHandler}>
+        <select value={selectedCountry} onChange={countryOnChangeHandler}>
           <option value="">Select {mode}</option>
           {countries.map((country) => (
             <option key={country.id} value={country.code}>
@@ -45,7 +48,7 @@ function Input({ mode }) {
           ))}
         </select>
       ) : (
-        <select onChange={yearOnChangeHandler}>
+        <select value={selectedYear} onChange={yearOnChangeHandler}>
           <option value="">Select {mode}</option>
           {years.map((year) => (
             <option key={year.year} value={year.year}>
