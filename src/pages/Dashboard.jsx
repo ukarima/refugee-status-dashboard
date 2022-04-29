@@ -6,19 +6,19 @@ import SelectionBoard from "../components/SelectionBoard";
 import Toggle from "../components/Toggle";
 import Stats from "../components/Stats";
 import Trendline from "../components/Trendline";
-import { changeClickedItem } from "../redux/selectedOption";
+import { changeClickedItem, reset } from "../redux/selectedOption";
 
 function Dashboard() {
-  const selectedCountry = useSelector((state) => state.selectedOptions.country);
-  const selectedYear = useSelector((state) => state.selectedOptions.year);
+  const selected = useSelector((state) => state.selectedOptions);
+
   const dispatch = useDispatch();
 
-  const [dataset, setDataset] = React.useState([]);
+  const [dataset, setDataset] = React.useState("");
   const [isActivated, setIsActivated] = React.useState(false);
-  const [isError, setIsError] = React.useState(false);
+  const [isError, setIsError] = React.useState(selected.noData);
 
   function urlCheck() {
-    if (selectedCountry !== "" && selectedYear !== "") {
+    if (selected.country !== "" && selected.year !== "") {
       setIsActivated(true);
     } else {
       setIsActivated(false);
@@ -30,24 +30,33 @@ function Dashboard() {
   };
 
   const getData = async () => {
-    const url = `https://api.unhcr.org/population/v1/population/?limit=&page=&yearFrom=&yearTo=&year=${selectedYear}&coo=&coa=${selectedCountry}`;
+    const url = `https://api.unhcr.org/population/v1/population/?limit=&page=&yearFrom=&yearTo=&year=${selected.year}&coo=&coa=${selected.country}`;
 
     const response = await axios.get(url);
     const dataLength = response.data.maxPages;
 
-    const errorCheckk = () => {
+    const errorCheck = () => {
       setDataset(response.data.items[0]);
       setIsError(false);
     };
 
-    dataLength !== 0 ? errorCheckk() : setIsError(true);
+    dataLength !== 0 ? errorCheck() : setIsError(true);
   };
 
   React.useEffect(() => {
     urlCheck();
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCountry, selectedYear]);
+  }, [selected.country, selected.year]);
+
+  React.useEffect(() => {
+    isError &&
+      dispatch(
+        reset({ country: "", year: "", item: "Refugees", noData: false })
+      );
+    isError && alert("No data found. Try another country.");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError]);
 
   const percentage = (dataType) => {
     const total =
@@ -97,11 +106,11 @@ function Dashboard() {
               />
             </div>
             <div className="detailsContainer orange">
-              {isActivated && (
-                <h3>
-                  {dataset.coa_name}'s Refugee Status Data in {selectedYear}
-                </h3>
-              )}
+              <h3>
+                {isActivated
+                  ? `${dataset.coa_name}'s Refugee Status Data in ${selected.year}`
+                  : "Welcome!"}
+              </h3>
             </div>
             <div className="detailsContainer shadow">
               <Trendline mode={isActivated} />

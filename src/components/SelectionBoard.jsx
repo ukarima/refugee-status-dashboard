@@ -9,7 +9,7 @@ function SelectionBoard() {
   const dispatch = useDispatch();
 
   function resetHandler() {
-    dispatch(reset({ country: "", year: "", item: "Refugees" }));
+    dispatch(reset({ country: "", year: "", item: "Refugees", noData: false }));
   }
   return (
     <div className="selectionBoard">

@@ -6,6 +6,7 @@ const selectedOptionSlice = createSlice({
     country: "",
     year: "",
     clickedItem: "Refugees",
+    noData: false,
   },
   reducers: {
     addCountry: (state, action) => {
@@ -21,6 +22,7 @@ const selectedOptionSlice = createSlice({
       state.country = action.payload.country;
       state.year = action.payload.year;
       state.clickedItem = action.payload.item;
+      state.noData = action.payload.noData;
     },
   },
 });

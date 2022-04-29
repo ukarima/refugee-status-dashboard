@@ -176,6 +176,10 @@ select {
     margin-bottom: 10px;
 }
 
+select:focus {
+    outline-color: #6e94a9
+}
+
 .donutOuterContainer {
     @include flex-box(flex-start);
     @include soft-shadow;
