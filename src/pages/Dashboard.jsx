@@ -6,24 +6,21 @@ import SelectionBoard from "../components/SelectionBoard";
 import Toggle from "../components/Toggle";
 import Stats from "../components/Stats";
 import Trendline from "../components/Trendline";
-import { changeClickedItem, reset } from "../redux/selectedOption";
+import { changeClickedItem, changeStatus } from "../redux/selectedOption";
 
 function Dashboard() {
   const selected = useSelector((state) => state.selectedOptions);
-
   const dispatch = useDispatch();
 
-  const [dataset, setDataset] = React.useState("");
-  const [isActivated, setIsActivated] = React.useState(false);
-  const [isError, setIsError] = React.useState(selected.noData);
-
-  function urlCheck() {
-    if (selected.country !== "" && selected.year !== "") {
-      setIsActivated(true);
-    } else {
-      setIsActivated(false);
-    }
+  function getDataHandler() {
+    dispatch(changeStatus({ dataStatus: true }));
+    setCurrentYear(selected.year);
+    getData();
   }
+
+  const [dataset, setDataset] = React.useState("");
+  const [isError, setIsError] = React.useState(selected.noData);
+  const [currentYear, setCurrentYear] = React.useState("");
 
   const handleClick = (value) => () => {
     dispatch(changeClickedItem({ item: value }));
@@ -42,21 +39,6 @@ function Dashboard() {
 
     dataLength !== 0 ? errorCheck() : setIsError(true);
   };
-
-  React.useEffect(() => {
-    urlCheck();
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected.country, selected.year]);
-
-  React.useEffect(() => {
-    isError &&
-      dispatch(
-        reset({ country: "", year: "", item: "Refugees", noData: false })
-      );
-    isError && alert("No data found. Try another country.");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError]);
 
   const percentage = (dataType) => {
     const total =
@@ -81,24 +63,44 @@ function Dashboard() {
               <Stats
                 name="Refugees"
                 number={dataset.refugees}
+                mode={
+                  selected.dataStatus &&
+                  selected.country === dataset.coa &&
+                  currentYear === selected.year
+                }
                 percentage={percentage(dataset.refugees)}
                 onClick={handleClick("Refugees")}
               />
               <Stats
                 name="Asylum Seekers"
                 number={dataset.asylum_seekers}
+                mode={
+                  selected.dataStatus &&
+                  selected.country === dataset.coa &&
+                  currentYear === selected.year
+                }
                 percentage={percentage(dataset.asylum_seekers)}
                 onClick={handleClick("Asylum Seekers")}
               />
               <Stats
                 name="Stateless"
                 number={dataset.stateless}
+                mode={
+                  selected.dataStatus &&
+                  selected.country === dataset.coa &&
+                  currentYear === selected.year
+                }
                 percentage={percentage(dataset.stateless)}
                 onClick={handleClick("Stateless")}
               />
               <Stats
                 name="Others"
                 number={parseInt(dataset.idps) + parseInt(dataset.ooc)}
+                mode={
+                  selected.dataStatus &&
+                  selected.country === dataset.coa &&
+                  currentYear === selected.year
+                }
                 percentage={percentage(
                   parseInt(dataset.idps) + parseInt(dataset.ooc)
                 )}
@@ -106,19 +108,29 @@ function Dashboard() {
               />
             </div>
             <div className="detailsContainer orange">
-              <h3>
-                {isActivated
-                  ? `${dataset.coa_name}'s Refugee Status Data in ${selected.year}`
-                  : "Welcome!"}
-              </h3>
+              {selected.dataStatus &&
+              selected.country === dataset.coa &&
+              currentYear === selected.year ? (
+                <h3>
+                  {dataset.coa_name}'s Refugee Status Data in {selected.year}
+                </h3>
+              ) : (
+                <h3>Welcome!</h3>
+              )}
             </div>
             <div className="detailsContainer shadow">
-              <Trendline mode={isActivated} />
+              <Trendline
+                mode={
+                  selected.dataStatus &&
+                  selected.country === dataset.coa &&
+                  currentYear === selected.year
+                }
+              />
             </div>
           </div>
         </div>
       </div>
-      <SelectionBoard />
+      <SelectionBoard onClick={getDataHandler} />
     </div>
   );
 }
