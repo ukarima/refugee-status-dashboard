@@ -52,6 +52,11 @@ function Dashboard() {
     return total.toFixed(3);
   };
 
+  const setMode =
+    selected.dataStatus &&
+    selected.country === dataset.coa &&
+    currentYear === selected.year;
+
   return (
     <div className="mainContainer">
       <div className="mainBoard">
@@ -63,44 +68,28 @@ function Dashboard() {
               <Stats
                 name="Refugees"
                 number={dataset.refugees}
-                mode={
-                  selected.dataStatus &&
-                  selected.country === dataset.coa &&
-                  currentYear === selected.year
-                }
+                mode={setMode}
                 percentage={percentage(dataset.refugees)}
                 onClick={handleClick("Refugees")}
               />
               <Stats
                 name="Asylum Seekers"
                 number={dataset.asylum_seekers}
-                mode={
-                  selected.dataStatus &&
-                  selected.country === dataset.coa &&
-                  currentYear === selected.year
-                }
+                mode={setMode}
                 percentage={percentage(dataset.asylum_seekers)}
                 onClick={handleClick("Asylum Seekers")}
               />
               <Stats
                 name="Stateless"
                 number={dataset.stateless}
-                mode={
-                  selected.dataStatus &&
-                  selected.country === dataset.coa &&
-                  currentYear === selected.year
-                }
+                mode={setMode}
                 percentage={percentage(dataset.stateless)}
                 onClick={handleClick("Stateless")}
               />
               <Stats
                 name="Others"
                 number={parseInt(dataset.idps) + parseInt(dataset.ooc)}
-                mode={
-                  selected.dataStatus &&
-                  selected.country === dataset.coa &&
-                  currentYear === selected.year
-                }
+                mode={setMode}
                 percentage={percentage(
                   parseInt(dataset.idps) + parseInt(dataset.ooc)
                 )}
@@ -108,9 +97,7 @@ function Dashboard() {
               />
             </div>
             <div className="detailsContainer orange">
-              {selected.dataStatus &&
-              selected.country === dataset.coa &&
-              currentYear === selected.year ? (
+              {setMode ? (
                 <h3>
                   {dataset.coa_name}'s Refugee Status Data in {selected.year}
                 </h3>
@@ -119,13 +106,7 @@ function Dashboard() {
               )}
             </div>
             <div className="detailsContainer shadow">
-              <Trendline
-                mode={
-                  selected.dataStatus &&
-                  selected.country === dataset.coa &&
-                  currentYear === selected.year
-                }
-              />
+              <Trendline mode={setMode} />
             </div>
           </div>
         </div>
