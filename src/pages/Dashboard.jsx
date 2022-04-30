@@ -19,7 +19,7 @@ function Dashboard() {
   }
 
   const [dataset, setDataset] = React.useState("");
-  const [isError, setIsError] = React.useState(selected.noData);
+  const [isError, setIsError] = React.useState(false);
   const [currentYear, setCurrentYear] = React.useState("");
 
   const handleClick = (value) => () => {
@@ -111,7 +111,13 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <SelectionBoard onClick={getDataHandler} />
+      <SelectionBoard
+        onClick={getDataHandler}
+        disabledStatus={
+          (selected.country !== "") & (selected.year !== "") ? false : true
+        }
+        errorStatus={isError}
+      />
     </div>
   );
 }

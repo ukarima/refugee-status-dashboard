@@ -1,10 +1,8 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
 
 import Input from "./Input";
 
-function SelectionBoard({ onClick }) {
-  const selected = useSelector((state) => state.selectedOptions);
+function SelectionBoard({ onClick, disabledStatus, errorStatus }) {
   return (
     <div className="selectionBoard">
       <div className="itemMainContainer">
@@ -17,8 +15,13 @@ function SelectionBoard({ onClick }) {
             <h3>Select Destination Country</h3>
             <Input mode="country" />
             <Input mode="year" />
+            {errorStatus && <p>No data found. Try another country or year.</p>}
           </div>
-          <button className="mainButton" onClick={onClick}>
+          <button
+            className="mainButton"
+            onClick={onClick}
+            disabled={disabledStatus}
+          >
             Get Data
           </button>
         </div>

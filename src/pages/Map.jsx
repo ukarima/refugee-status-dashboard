@@ -36,7 +36,7 @@ function Map() {
       <div className="mainBoard">
         <Toggle id="map" />
         <div className="statMainContainer">
-          <h1>World Map Refugee Density</h1>
+          <h1>World Map Refugee Density in 2021</h1>
           <div className="statOuterContainer">
             <ComposableMap
               width={750}

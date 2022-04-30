@@ -133,6 +133,11 @@ body {
                     font-size : large
                 }
 
+                p {
+                    font-size: 10px;
+                    color    : #f38653;
+                }
+
             }
         }
 
@@ -147,7 +152,6 @@ body {
             color           : #ffffff;
             height          : 30px;
             text-align      : center;
-            cursor          : pointer;
             background-color: #f38653;
             border-radius   : 5px;
             position        : absolute;
@@ -157,14 +161,22 @@ body {
             margin-left     : auto;
             margin-right    : auto;
             width           : 90px;
-        }
 
-        .mainButton:hover {
-            opacity: 0.6;
+            &[disabled] {
+                background-color: #cccccc;
+                color           : #a8a4a4;
+
+            }
+
+            &:hover,
+            &:active {
+                &:not([disabled]) {
+                    opacity: 0.6;
+                    cursor : pointer;
+                }
+            }
         }
     }
-
-
 }
 
 select {
