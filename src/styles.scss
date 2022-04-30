@@ -133,10 +133,16 @@ body {
                     font-size : large
                 }
 
-                p {
-                    font-size: 10px;
-                    color    : #f38653;
+                .errorContainer {
+                    height: 20px;
+
+                    p {
+                        font-size: 10px;
+                        color    : #f38653;
+                    }
                 }
+
+
 
             }
         }
@@ -201,6 +207,13 @@ select:focus {
     box-sizing: border-box;
     cursor    : pointer;
 
+    &:hover {
+        box-shadow: 4px 2px 18px #bbcfda, -4px -4px 13px #ffffff,
+            inset 6px 6px 16px rgba(209, 217, 230, 0.6),
+            inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+        transform: translateY(2px);
+    }
+
     .donutInnerContainer {
         width: 80px;
     }
@@ -224,13 +237,6 @@ select:focus {
     }
 }
 
-.donutOuterContainer:hover {
-    box-shadow: 4px 2px 18px #bbcfda, -4px -4px 13px #ffffff,
-        inset 6px 6px 16px rgba(209, 217, 230, 0.6),
-        inset -8px -8px 8px rgba(255, 255, 255, 0.2);
-    transform: translateY(2px);
-}
-
 .notSelectedItem {
     width: 110px;
 }
@@ -240,10 +246,27 @@ select:focus {
 }
 
 .orange {
+    @include flex-box(flex-start);
+    width           : 100%;
     background-color: #efd8cd;
     flex            : 1;
     border-radius   : 10px;
     margin          : 20px;
-    padding         : 10px;
-    box-sizing      : border-box
+    padding         : 20px 30px;
+    box-sizing      : border-box;
+    flex-direction  : column;
+    align-items     : flex-start;
+
+    .title {
+        font-weight  : bold;
+        flex         : 0.2;
+        font-size    : 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .detail {
+        font-size : 0.7rem;
+        flex      : 0.8;
+        text-align: justify;
+    }
 }

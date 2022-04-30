@@ -15,7 +15,11 @@ function SelectionBoard({ onClick, disabledStatus, errorStatus }) {
             <h3>Select Destination Country</h3>
             <Input mode="country" />
             <Input mode="year" />
-            {errorStatus && <p>No data found. Try another country or year.</p>}
+            <div className="errorContainer">
+              {errorStatus && (
+                <p>No data found. Try another country or year.</p>
+              )}
+            </div>
           </div>
           <button
             className="mainButton"

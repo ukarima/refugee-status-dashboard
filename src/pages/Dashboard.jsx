@@ -96,11 +96,26 @@ function Dashboard() {
                 onClick={handleClick("Others")}
               />
             </div>
-            <div className="detailsContainer orange">
+            <div className="orange">
               {setMode ? (
-                <h3>
-                  {dataset.coa_name}'s Refugee Status Data in {selected.year}
-                </h3>
+                <>
+                  <div className="title">
+                    {dataset.coa_name}'s Refugee Status Data in {selected.year}
+                  </div>
+                  <div className="detail">
+                    The percentage of refugees that has been stated as refugee
+                    in {dataset.coa_name} {currentYear}{" "}
+                    {percentage(dataset.refugees)}% ({dataset.returned_refugees}{" "}
+                    returned refugees,{" "}
+                    {parseInt(dataset.refugees) -
+                      parseInt(dataset.returned_refugees)}{" "}
+                    has not returned), asylum seekers{" "}
+                    {percentage(dataset.asylum_seekers)}% (
+                    {dataset.asylum_seekers}), and stateless{" "}
+                    {percentage(dataset.stateless)}% ({dataset.stateless}) of
+                    the status data that has been gathered from UNHCR.
+                  </div>
+                </>
               ) : (
                 <h3>Welcome!</h3>
               )}
@@ -114,7 +129,7 @@ function Dashboard() {
       <SelectionBoard
         onClick={getDataHandler}
         disabledStatus={
-          (selected.country !== "") & (selected.year !== "") ? false : true
+          selected.country !== "" && selected.year !== "" ? false : true
         }
         errorStatus={isError}
       />
